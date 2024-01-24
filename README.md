@@ -1,2 +1,2 @@
-# csci-phys-capstone
-This project is my capstone project for Chico State's Computer Science bachelor's degree. It combines my interest in both Physics and Computer Science as I am creating a 3D visualization to allow the user to create and calculate the electric field of an electric charge configuration.
+# EFieldFlow
+This project is my capstone project for Chico State's Computer Science bachelor's degree. I plan to combine my interest in both Physics and Computer Science by creating a desktop application that will allow the user to graphically create an electric charge configuration. The program will then calculate the strength of the electric field at a point in space as well as show the vector field lines for how the electric field behaves in space. The purpose of the application to be some form of teaching/educational aid for students in introductory electricity and magnetism courses to better understand the behaviour of electric fields.
