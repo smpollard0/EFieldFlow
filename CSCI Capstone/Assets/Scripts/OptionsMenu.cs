@@ -3,32 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class OptionsMenu : MonoBehaviour
 {
 
     public TMPro.TMP_Dropdown resolutionDropdown;
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
+    private List<Resolution> filteredResolutions;
+    private double currentRefreshRate;
+    int currentResolutionIndex = 0;
+
     // this function is called when the scene loads
     void Start() {
         // this method basically has unity figure out what resolutions are allowed for the user's current monitor
         resolutions = Screen.resolutions;
+        filteredResolutions = new List<Resolution>();
 
         // clear all options currently in the resolutions dropdown menu
         resolutionDropdown.ClearOptions();
-
-        // create a list of strings which represent the resolutions to add
-        List<string> options = new List<string>();
-
-        int currentResolutionIndex = 0;
+        currentRefreshRate = Screen.currentResolution.refreshRateRatio.value;
 
         // iterate through the resolutions and turn them into strings to put into options
         for (int i = 0; i < resolutions.Length; i++){
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            if (resolutions[i].refreshRateRatio.value == currentRefreshRate){
+                filteredResolutions.Add(resolutions[i]);
+            }
+        }
 
-            if (resolutions[i].width == Screen.currentResolution.width && 
-                resolutions[i].height == Screen.currentResolution.height){
+        List<string> options = new List<string>();
+
+        for (int i = 0; i < filteredResolutions.Count; i++){
+            string resolutionOption = filteredResolutions[i].width + " x " + filteredResolutions[i].height + " " + Math.Round(filteredResolutions[i].refreshRateRatio.value) + " Hz";
+            options.Add(resolutionOption);
+            if (filteredResolutions[i].width == Screen.width && 
+                filteredResolutions[i].height == Screen.height){
                 currentResolutionIndex = i;
             }
         }
@@ -40,7 +49,7 @@ public class OptionsMenu : MonoBehaviour
     }
 
     public void SetResolution(int resolutionIndex){
-        Resolution resolution = resolutions[resolutionIndex];
+        Resolution resolution = filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
