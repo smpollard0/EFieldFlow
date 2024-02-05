@@ -417,7 +417,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 67014282}
         m_TargetAssemblyTypeName: SimulationsMenu, Assembly-CSharp
-        m_MethodName: StartEFieldSimulation
+        m_MethodName: EFieldNewOrLoad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

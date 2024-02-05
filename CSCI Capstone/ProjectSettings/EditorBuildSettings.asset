@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Options Menu.unity
     guid: 1cfe75d0c3ad19d4a8de590846e714c2
+  - enabled: 1
+    path: Assets/Scenes/EField New or Load.unity
+    guid: e9b9729010258394bb1a613b16c4081d
   m_configObjects: {}
