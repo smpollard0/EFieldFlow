@@ -39,7 +39,8 @@ public class CameraMovement : MonoBehaviour
         }
 
         // if the control button is held, zoom in and out (left or right control for left and right handed people c:)
-        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl))){
+        // also make sure the game isn't paused
+        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused){
             transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
         }
 
