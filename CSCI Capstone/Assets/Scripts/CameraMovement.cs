@@ -8,9 +8,11 @@ public class CameraMovement : MonoBehaviour
     float xRotation = 0f;
     float yRotation = 0f;
 
+    public float dragSpeed = 6f;
+    public float zoomSpeed = 6f;
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         // GetMouseButton(0) = LMB
         // GetMouseButton(1) = RMB
         // if the right mouse button is held down
@@ -28,7 +30,18 @@ public class CameraMovement : MonoBehaviour
             
             // use the components of the turn vector to rotate the camera
             transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f); 
-
         }
+
+        // drag the camera around the scene using LMB
+        if (Input.GetMouseButton(0)){
+            transform.Translate(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * dragSpeed, 
+                                -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * dragSpeed, 0);
+        }
+
+        // if the control button is held, zoom in and out (left or right control for left and right handed people c:)
+        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl))){
+            transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
+        }
+
     }
 }
