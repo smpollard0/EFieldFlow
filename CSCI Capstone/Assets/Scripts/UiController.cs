@@ -20,7 +20,7 @@ public class UiController : MonoBehaviour
     {
         // Handle scroll wheel input to change selected item
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0)
+        if (scroll != 0 && !(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused)
         {
             ChangeSelectedItem(scroll);
         }
