@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     float yRotation = 0f;
 
     public float dragSpeed = 6f;
-    public float zoomSpeed = 6f;
+    public float zoomSpeed = 30f;
 
     // Update is called once per frame
     void Update() {
@@ -43,6 +43,7 @@ public class CameraMovement : MonoBehaviour
         if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused){
             transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
         }
+        
 
     }
 }
