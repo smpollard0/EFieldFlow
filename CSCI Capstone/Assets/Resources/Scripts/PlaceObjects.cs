@@ -5,18 +5,17 @@ using UnityEngine;
 public class PlaceObjects : MonoBehaviour{
 
     private Camera mainCamera; // Reference to the main camera
-    private float distanceFromCamera = 10f;
-    
+    private float distanceFromCamera = 10f; // variable for how far from the camera to put an object if it doesn't collide with something
     bool buttonIsPressed = false;
 
     void Awake(){
-        // reference the camera
+        // reference the camera (this feels dumb considering this script is attached to the camera)
         mainCamera = Camera.main;
     }
 
     void Update() {
         // press Q button to play a game object
-        if (Input.GetKey(KeyCode.Q) && !buttonIsPressed){
+        if (Input.GetKey(KeyCode.Q) && !buttonIsPressed && !PauseMEnu.GameIsPaused){
             // create gameobject to place
             GameObject objectToPlace;
             
@@ -29,6 +28,7 @@ public class PlaceObjects : MonoBehaviour{
                 case 0:
                     // temporarily place spheres; come back later and make these prefabs 
                     objectToPlace = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    objectToPlace.tag = "Sphere"; // give spheres the "Sphere" tag so they are recognized when being clicked
                     if (Physics.Raycast(ray, out hit)){
                         //  when the ray intersects with something in the scene, place object
                         SphereCollider sphereCollider = objectToPlace.GetComponent<SphereCollider>();
@@ -65,11 +65,11 @@ public class PlaceObjects : MonoBehaviour{
                     // this should never happen
                     break;
             }// switch
-        }
+        }// if
         if (Input.GetKeyUp(KeyCode.Q)){
             // Reset the flag when the button is released
             buttonIsPressed = false;
-        }
-    }
-}
+        }// if
+    }// Update()
+}// class PlaceObjects
 
