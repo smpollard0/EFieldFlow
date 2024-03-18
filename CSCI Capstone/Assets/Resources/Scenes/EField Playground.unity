@@ -1045,6 +1045,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779d403f133287c4d900c438ea440747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowPrefabX: {fileID: 8010315680860690527, guid: f709053ccec02a541a85c03c62ed64ac, type: 3}
+  arrowPrefabY: {fileID: 8610729354907694276, guid: c5a3537e2d7703f4dbaf6d51b0b26059, type: 3}
+  arrowPrefabZ: {fileID: 5152751167740908886, guid: 26505f572831c104ca9ed3e003d5590b, type: 3}
 --- !u!1001 &979479314
 PrefabInstance:
   m_ObjectHideFlags: 0
