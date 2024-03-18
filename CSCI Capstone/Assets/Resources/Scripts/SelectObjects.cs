@@ -88,11 +88,14 @@ public class SelectObjects : MonoBehaviour
         // Instantiate arrow objects in the x, y, and z directions
         GameObject arrowX = Instantiate(arrowPrefabX, position + Vector3.right * offset, Quaternion.identity);
         arrowX.transform.rotation = Quaternion.Euler(0, 90, 0); // Rotate arrowX 90 degrees around y-axis
+        arrowX.tag = "Xarrow";
 
         GameObject arrowY = Instantiate(arrowPrefabY, position + Vector3.up * offset, Quaternion.identity);
         arrowY.transform.rotation = Quaternion.Euler(-90, 0, 0); // Rotate arrowY -90 degrees around x-axis
+        arrowY.tag = "Yarrow";
 
         GameObject arrowZ = Instantiate(arrowPrefabZ, position + Vector3.forward * offset, Quaternion.identity);
+        arrowZ.tag = "Zarrow";
         // No rotation needed for arrowZ
 
         // Parent arrows to the selected object for organization (optional)
