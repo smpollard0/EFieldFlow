@@ -1035,6 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe421a82a91acc479505fa95f027d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointCharge: {fileID: 1455873849560461887, guid: 605c79df96ecc2d4dbd01f514584cf7b, type: 3}
 --- !u!1001 &979479314
 PrefabInstance:
   m_ObjectHideFlags: 0

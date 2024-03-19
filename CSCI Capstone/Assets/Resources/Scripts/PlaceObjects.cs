@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlaceObjects : MonoBehaviour{
 
+    public GameObject pointCharge;
     private Camera mainCamera; // Reference to the main camera
     private float distanceFromCamera = 10f; // variable for how far from the camera to put an object if it doesn't collide with something
     bool buttonIsPressed = false;
@@ -27,7 +28,7 @@ public class PlaceObjects : MonoBehaviour{
                 // point charges
                 case 0:
                     // temporarily place spheres; come back later and make these prefabs 
-                    objectToPlace = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    objectToPlace = GameObject.Instantiate(pointCharge);
                     objectToPlace.tag = "Sphere"; // give spheres the "Sphere" tag so they are recognized when being clicked
                     if (Physics.Raycast(ray, out hit)){
                         //  when the ray intersects with something in the scene, place object
