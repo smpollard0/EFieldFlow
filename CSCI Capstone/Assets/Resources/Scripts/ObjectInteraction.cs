@@ -42,6 +42,8 @@ public class ObjectInteraction : MonoBehaviour
             HandleCameraMovement();
         }
 
+        // CURRENT: camera still moves when object is dragged, and objects when dragged move a different direction based on where the camera is
+
         // Select and manipulate objects
         HandleObjectInteraction();
     }
@@ -107,7 +109,7 @@ public class ObjectInteraction : MonoBehaviour
     }
 
     void InstantiateArrows(Vector3 position) {
-         // Check if arrows already exist on the selected object
+        // Check if arrows already exist on the selected object
         if (selectedObject.transform.Find("ArrowX") == null) {
             float offset = 1.0f;
 
