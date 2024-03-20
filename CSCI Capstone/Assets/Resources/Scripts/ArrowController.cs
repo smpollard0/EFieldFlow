@@ -1,58 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    // Reference to the parent object (the object to be moved)
     private GameObject parentObject;
-
-    // Store the initial mouse position
     private Vector3 initialMousePosition;
+    private Vector3 initialObjectPosition;
+    private bool isDragging = false;
 
     void Start()
     {
-        // Find the parent object by moving up the hierarchy
         parentObject = transform.parent.gameObject;
     }
 
     void OnMouseDown()
     {
-        // Store the initial mouse position
+        isDragging = true;
         initialMousePosition = Input.mousePosition;
+        initialObjectPosition = parentObject.transform.position;
     }
 
     void OnMouseDrag()
     {
-        // Calculate the mouse movement since the last frame
-        Vector3 mouseDelta = (Input.mousePosition - initialMousePosition) * Time.deltaTime;
+        if (!isDragging)
+        return;
 
-        // Move the parent object based on the arrow's tag
-        MoveParentObject(mouseDelta);
+        Vector3 currentMousePosition = Input.mousePosition;
+        Vector3 mouseDelta = currentMousePosition - initialMousePosition;
 
-        // Update the initial mouse position for the next frame
-        initialMousePosition = Input.mousePosition;
+        // Determine movement direction based on arrow axis
+        Vector3 movementDirection = Vector3.zero;
+        if (gameObject.CompareTag("Xarrow"))
+            movementDirection = Vector3.right;
+        else if (gameObject.CompareTag("Yarrow"))
+            movementDirection = Vector3.up;
+        else if (gameObject.CompareTag("Zarrow"))
+            movementDirection = Vector3.forward;
+
+        // Calculate movement amount based on mouse movement
+        float movementAmount = Vector3.Dot(mouseDelta, Camera.main.transform.right);
+
+        // Translate parent object position along the specified axis
+        parentObject.transform.position = initialObjectPosition + (movementDirection * movementAmount * 0.01f);
     }
 
-    void MoveParentObject(Vector3 mouseDelta)
+    void OnMouseUp()
     {
-
-        // Get the tag of the arrow
-        string arrowTag = gameObject.tag;
-
-        // Check which arrow we just clicked on
-        switch (arrowTag)
-        {
-            case "Xarrow":
-                parentObject.transform.Translate(Vector3.right * Time.deltaTime * mouseDelta.x);
-                break;
-            case "Yarrow":
-                parentObject.transform.Translate(Vector3.up * Time.deltaTime * mouseDelta.y);
-                break;
-            case "Zarrow":
-                parentObject.transform.Translate(Vector3.forward * Time.deltaTime * mouseDelta.z);
-                break;
-            default:
-                Debug.LogWarning("Unknown arrow tag: " + arrowTag);
-                break;
-        }
+        isDragging = false;
     }
 }
