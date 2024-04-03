@@ -361,7 +361,6 @@ MonoBehaviour:
   - {fileID: 108726953}
   - {fileID: 979479316}
   - {fileID: 1078799167}
-  selectedItemIndex: 0
 --- !u!224 &108726952 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 144248905428729685, guid: 4ae831f108d62994eab8ac09bf42431f, type: 3}
@@ -924,6 +923,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1014,12 +1014,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5127553b1556f53419666dd8f12e8b71, type: 3}
+  m_Script: {fileID: 11500000, guid: f676b6b538934724ebac0805b7a99f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowPrefabX: {fileID: 8010315680860690527, guid: f709053ccec02a541a85c03c62ed64ac, type: 3}
+  arrowPrefabY: {fileID: 8610729354907694276, guid: c5a3537e2d7703f4dbaf6d51b0b26059, type: 3}
+  arrowPrefabZ: {fileID: 5152751167740908886, guid: 26505f572831c104ca9ed3e003d5590b, type: 3}
   mouseSensitivity: 1000
   dragSpeed: 6
   zoomSpeed: 30
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe421a82a91acc479505fa95f027d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointCharge: {fileID: 1455873849560461887, guid: 605c79df96ecc2d4dbd01f514584cf7b, type: 3}
 --- !u!1001 &979479314
 PrefabInstance:
   m_ObjectHideFlags: 0

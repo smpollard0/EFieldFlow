@@ -13,21 +13,9 @@ public class UiController : MonoBehaviour
     LineCharges = 1
     VolumneCharges = 2
     */
-    public int selectedItemIndex = 0; // Index of the currently selected item
+    public static int selectedItemIndex = 0; // Index of the currently selected item
     
-
-    void Update()
-    {
-        // Handle scroll wheel input to change selected item
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0 && !(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)))
-        {
-            ChangeSelectedItem(scroll);
-        }
-    }
-
-    void ChangeSelectedItem(float scrollDirection)
-    {
+    void ChangeSelectedItem(float scrollDirection) {
         // Update the selected item index based on scroll direction
         selectedItemIndex -= (int)Mathf.Sign(scrollDirection);
         // Ensure the index stays within bounds
@@ -37,8 +25,7 @@ public class UiController : MonoBehaviour
         UpdateSelectedItemOverlay();
     }
 
-    void UpdateSelectedItemOverlay()
-    {
+    void UpdateSelectedItemOverlay() {
         // Activate selected item overlay for the currently selected item
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -46,4 +33,14 @@ public class UiController : MonoBehaviour
             itemSlots[i].transform.GetChild(0).gameObject.SetActive(isSelected);
         }
     }
+
+    void Update() {
+        // Handle scroll wheel input to change selected item
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0 && !(Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused) {
+            ChangeSelectedItem(scroll);
+        }
+    }
+
+    
 }
