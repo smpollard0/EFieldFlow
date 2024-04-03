@@ -37,8 +37,7 @@ public class ObjectInteraction : MonoBehaviour
     }
 
     void Update() {
-        if (!isObjectDragged){
-            // Handle camera movement
+        if (!ArrowController.isDragging){
             HandleCameraMovement();
         }
 
@@ -93,13 +92,10 @@ public class ObjectInteraction : MonoBehaviour
                         DeselectObject();
                     }
 
-                    isObjectDragged = true;
                     selectedObject = newSelection;
                     InstantiateArrows(selectedObject.transform.position);
                 }
             }
-        } else if (Input.GetMouseButtonUp(0)) {
-            isObjectDragged = false;
         }
 
         if (Input.GetKeyDown("space") && !PauseMEnu.GameIsPaused)

@@ -7,7 +7,7 @@ public class ArrowController : MonoBehaviour
     private GameObject parentObject;
     private Vector3 initialMousePosition;
     private Vector3 initialObjectPosition;
-    public bool isDragging = false;
+    public static bool isDragging = false;
 
     void Start()
     {
