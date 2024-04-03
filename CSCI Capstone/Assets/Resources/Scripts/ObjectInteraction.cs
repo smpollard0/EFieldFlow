@@ -24,9 +24,6 @@ public class ObjectInteraction : MonoBehaviour
 
     private Vector3 initialMousePosition;
 
-    private bool isObjectDragged = false; // Flag to track if an object is being dragged
-
-
     void Awake() {
         mainCamera = Camera.main;
         outlineMaterial = Resources.Load<Material>("Materials/OutlineMaterial");
@@ -37,12 +34,11 @@ public class ObjectInteraction : MonoBehaviour
     }
 
     void Update() {
+        // If an object is not being dragged, allow the camera to move
         if (!ArrowController.isDragging){
             HandleCameraMovement();
         }
-
-        // CURRENT: camera still moves when object is dragged, and objects when dragged move a different direction based on where the camera is
-
+        
         // Select and manipulate objects
         HandleObjectInteraction();
     }

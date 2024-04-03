@@ -30,25 +30,30 @@ public class ArrowController : MonoBehaviour
         Vector3 mouseDelta = currentMousePosition - initialMousePosition;
         float movementAmount = 0f;
 
-        // Determine movement direction based on arrow axis
+        // Convert screen movement to world space movement
+        Vector3 worldMovement = Camera.main.transform.TransformDirection(mouseDelta);
+
+        // Extract movement along the arrow's axis
         Vector3 movementDirection = Vector3.zero;
-        if (gameObject.CompareTag("Xarrow")){
+        if (gameObject.CompareTag("Xarrow"))
+        {
+            movementAmount = worldMovement.x;
             movementDirection = Vector3.right;
-            movementAmount = Vector3.Dot(mouseDelta, Camera.main.transform.right);
         }
-            
-        else if (gameObject.CompareTag("Yarrow")){
+        else if (gameObject.CompareTag("Yarrow"))
+        {
+            movementAmount = worldMovement.y;
             movementDirection = Vector3.up;
-            movementAmount = Vector3.Dot(mouseDelta, Camera.main.transform.up);
         }
-            
-        else if (gameObject.CompareTag("Zarrow")){
+        else if (gameObject.CompareTag("Zarrow"))
+        {
+            movementAmount = worldMovement.z;
             movementDirection = Vector3.forward;
-            movementAmount = Vector3.Dot(mouseDelta, Camera.main.transform.right);
-        }        
+        }
 
         // Translate parent object position along the specified axis
         parentObject.transform.position = initialObjectPosition + (movementDirection * movementAmount * 0.01f);
+
     }
 
     void OnMouseUp()
