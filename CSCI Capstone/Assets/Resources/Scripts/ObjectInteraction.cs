@@ -94,9 +94,15 @@ public class ObjectInteraction : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("space") && !PauseMEnu.GameIsPaused)
-        {
+
+        // Deselect an object when the space bar is pressed
+        if (Input.GetKeyDown("space") && !PauseMEnu.GameIsPaused && selectedObject != null) {
             DeselectObject();
+        }
+
+        // Delete a selected object when backspace or delete key is pressed
+        if ((Input.GetKeyDown("backspace") || Input.GetKeyDown("delete")) && !PauseMEnu.GameIsPaused && selectedObject != null){
+            Destroy(selectedObject);
         }
     }
 
