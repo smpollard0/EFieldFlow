@@ -9,14 +9,14 @@ public class ObjectInteraction : MonoBehaviour
     public GameObject arrowPrefabY;
     public GameObject arrowPrefabZ;
 
+    // Variables for camera movement
     public float mouseSensitivity = 1000f;
     float xRotation = 0f;
     float yRotation = 0f;
-
     public float dragSpeed = 6f;
     public float zoomSpeed = 30f;
 
-    private GameObject selectedObject; // variable for selected gameobject
+    public static GameObject selectedObject; // variable for selected gameobject
     private GameObject arrowsParent; // parent object for arrows
 
     private Camera mainCamera; // Reference to the main camera
@@ -45,8 +45,7 @@ public class ObjectInteraction : MonoBehaviour
 
     void HandleCameraMovement() {
         // Camera rotation
-        if (Input.GetMouseButton(1))
-        {
+        if (Input.GetMouseButton(1)) {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -58,15 +57,13 @@ public class ObjectInteraction : MonoBehaviour
         }
 
         // Camera dragging
-        if (Input.GetMouseButton(0))
-        {
+        if (Input.GetMouseButton(0)) {
             transform.Translate(-Input.GetAxisRaw("Mouse X") * Time.deltaTime * dragSpeed,
                                 -Input.GetAxisRaw("Mouse Y") * Time.deltaTime * dragSpeed, 0);
         }
 
         // Camera zoom
-        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused)
-        {
+        if ((Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl)) && !PauseMEnu.GameIsPaused) {
             transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed, Space.Self);
         }
     }
@@ -77,14 +74,12 @@ public class ObjectInteraction : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.CompareTag("Sphere"))
-                {
+            // Perform raycast
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.collider.CompareTag("Sphere")) {
                     GameObject newSelection = hit.collider.gameObject;
 
-                    if (selectedObject != null && selectedObject != newSelection)
-                    {
+                    if (selectedObject != null && selectedObject != newSelection) {
                         DeselectObject();
                     }
 
@@ -94,14 +89,13 @@ public class ObjectInteraction : MonoBehaviour
             }
         }
 
-
         // Deselect an object when the space bar is pressed
         if (Input.GetKeyDown("space") && !PauseMEnu.GameIsPaused && selectedObject != null) {
             DeselectObject();
         }
 
-        // Delete a selected object when backspace or delete key is pressed
-        if ((Input.GetKeyDown("backspace") || Input.GetKeyDown("delete")) && !PauseMEnu.GameIsPaused && selectedObject != null){
+        // Delete a selected object when backspace or delete key is pressed, but only 
+        if ((Input.GetKeyDown("backspace") || Input.GetKeyDown("delete")) && !PauseMEnu.GameIsPaused && selectedObject != null && !SelectionMenu.isEditing){
             Destroy(selectedObject);
         }
     }
@@ -133,13 +127,10 @@ public class ObjectInteraction : MonoBehaviour
     }
 
     void DestroyArrows() {
-        if (selectedObject != null)
-        {
+        if (selectedObject != null) {
             // Destroy individual arrows
-            foreach (Transform child in selectedObject.transform)
-            {
-                if (child.CompareTag("Xarrow") || child.CompareTag("Yarrow") || child.CompareTag("Zarrow"))
-                {
+            foreach (Transform child in selectedObject.transform) {
+                if (child.CompareTag("Xarrow") || child.CompareTag("Yarrow") || child.CompareTag("Zarrow")) {
                     Destroy(child.gameObject);
                 }
             }
@@ -148,10 +139,10 @@ public class ObjectInteraction : MonoBehaviour
 
 
     void DeselectObject() {
-        if (selectedObject != null)
-        {
+        if (selectedObject != null) {
             DestroyArrows();
             selectedObject = null;
+            // Make selection menu invisible
         }
     }
 
