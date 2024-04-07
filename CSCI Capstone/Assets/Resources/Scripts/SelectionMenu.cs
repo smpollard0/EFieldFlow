@@ -22,45 +22,26 @@ public class SelectionMenu : MonoBehaviour {
         yCoordinateField = selectionMenuUI.transform.Find("yPos").GetComponent<TMP_InputField>();
         zCoordinateField = selectionMenuUI.transform.Find("zPos").GetComponent<TMP_InputField>();
 
+        // Come back and add one for charge value
         // Subscribe to input field click events
         xCoordinateField.onSelect.AddListener(delegate { OnEditStart(); });
         yCoordinateField.onSelect.AddListener(delegate { OnEditStart(); });
         zCoordinateField.onSelect.AddListener(delegate { OnEditStart(); });
 
-        // Subscribe to input field end edit events
-        xCoordinateField.onEndEdit.AddListener(delegate { OnEditEnd(); });
-        yCoordinateField.onEndEdit.AddListener(delegate { OnEditEnd(); });
-        zCoordinateField.onEndEdit.AddListener(delegate { OnEditEnd(); });
     }
 
     void OnEditStart(){
         isEditing = true;
-        Debug.Log("Field clicked");
-    }
-
-    void OnEditEnd(){
-        isEditing = false;
-    }
-
-    void UpdateObjectPosition() {
-        // Get the current object position
-        Vector3 objectPosition = ObjectInteraction.selectedObject.transform.position;
-
-        // Update object position with input field values
-        objectPosition.x = float.Parse(xCoordinateField.text);
-        objectPosition.y = float.Parse(yCoordinateField.text);
-        objectPosition.z = float.Parse(zCoordinateField.text);
-
-        // Apply the new position to the object
-        ObjectInteraction.selectedObject.transform.position = objectPosition;
     }
 
     // Called once every frame
     void Update() {
         // If selectedObject is not null, we want to make this menu visible
-        if (ObjectInteraction.selectedObject != null) {
+        if (ObjectInteraction.selectedObject != null && !isEditing) {
             ShowMenu();
-        } else{
+        } else if (ObjectInteraction.selectedObject != null && isEditing) {
+            selectionMenuUI.SetActive(true);
+        } else {
             selectionMenuUI.SetActive(false);
         }
     }
@@ -78,6 +59,13 @@ public class SelectionMenu : MonoBehaviour {
     }
 
     public void SaveChanges(){
-        Debug.Log("test");
+        // First check if all the input data is valid (i.e. they're numbers)
+
+        // Update object position with input field values
+        temporaryPosition.x = float.Parse(xCoordinateField.text);
+        temporaryPosition.y = float.Parse(yCoordinateField.text);
+        temporaryPosition.z = float.Parse(zCoordinateField.text);
+        ObjectInteraction.selectedObject.transform.position = temporaryPosition;
+        isEditing = false;
     }
 }
