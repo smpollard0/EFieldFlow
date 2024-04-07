@@ -27,9 +27,11 @@ public class PlaceObjects : MonoBehaviour{
             switch (UiController.selectedItemIndex){
                 // point charges
                 case 0:
-                    // temporarily place spheres; come back later and make these prefabs 
                     objectToPlace = GameObject.Instantiate(pointCharge);
                     objectToPlace.tag = "Sphere"; // give spheres the "Sphere" tag so they are recognized when being clicked
+                    // Get the PointCharge component from the object
+                    PointCharge pointChargeComponent = objectToPlace.GetComponent<PointCharge>();
+                    
                     if (Physics.Raycast(ray, out hit)){
                         //  when the ray intersects with something in the scene, place object
                         SphereCollider sphereCollider = objectToPlace.GetComponent<SphereCollider>();
