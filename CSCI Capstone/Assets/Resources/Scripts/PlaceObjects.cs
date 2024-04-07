@@ -16,7 +16,7 @@ public class PlaceObjects : MonoBehaviour{
 
     void Update() {
         // press Q button to play a game object
-        if (Input.GetKey(KeyCode.Q) && !buttonIsPressed && !PauseMEnu.GameIsPaused){
+        if (Input.GetKey(KeyCode.Q) && !buttonIsPressed && !PauseMEnu.GameIsPaused && !SelectionMenu.isEditing){
             // create gameobject to place
             GameObject objectToPlace;
             
