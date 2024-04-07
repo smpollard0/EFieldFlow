@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMEnu : MonoBehaviour
-{
+public class PauseMEnu : MonoBehaviour {
     public static bool GameIsPaused = false;
     
     public GameObject pauseMenuUI;
+    public GameObject controlsMenuUI;
 
     // Update is called once per frame
     void Update() {
@@ -20,15 +20,21 @@ public class PauseMEnu : MonoBehaviour
             }
         }
     }
-    
-    public void Resume(){
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+
+    void Pause(){
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
-    public void LoadOptionsMenu(){
-        Time.timeScale = 1f;
+    // Button functionalities
+    public void Resume(){
+        if (pauseMenuUI.activeSelf){
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+        }
+        
     }
 
     public void QuitGame(){
@@ -36,10 +42,19 @@ public class PauseMEnu : MonoBehaviour
         GameIsPaused = false;
         SceneManager.LoadScene(0);
     }
+    public void LoadOptionsMenu(){
+        Time.timeScale = 1f;
+        // Come back and do this teehee
+    }
 
-    void Pause(){
+    public void LoadControlsMenu(){
+        controlsMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+    }
+
+    // Controls menu functionalities
+    public void GoBack(){
+        controlsMenuUI.SetActive(false);
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
     }
 }
