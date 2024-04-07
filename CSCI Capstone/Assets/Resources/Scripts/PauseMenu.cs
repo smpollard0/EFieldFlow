@@ -33,6 +33,7 @@ public class PauseMEnu : MonoBehaviour
 
     public void QuitGame(){
         Time.timeScale = 1f;
+        GameIsPaused = false;
         SceneManager.LoadScene(0);
     }
 
