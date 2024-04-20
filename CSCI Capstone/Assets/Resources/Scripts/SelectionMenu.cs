@@ -132,8 +132,8 @@ public class SelectionMenu : MonoBehaviour {
         return float.TryParse(value, out result);
     }
 
+    // Show error message in TMP text box
     void ShowErrorMessage(string message) {
-        // Show error message in TMP text box
         errorBox.text = message;
     }
 
