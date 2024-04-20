@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PointCharge : MonoBehaviour {
-    // Static variable to keep track of the count
+    // Static variable to keep track of the number of objects created
     private static int nextUOID = 0;
 
     // Private member variables

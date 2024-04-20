@@ -12,6 +12,7 @@ public class SelectionMenu : MonoBehaviour {
     private TMP_InputField zCoordinateField;
     private TMP_InputField chargeField;
     private TMP_Text errorBox;
+    private TMP_Text objectTitle;
 
     // Boolean to prevent accidentally deleting selected object
     public static bool isEditing = false;
@@ -27,6 +28,7 @@ public class SelectionMenu : MonoBehaviour {
 
         chargeField = selectionMenuUI.transform.Find("ChargeValueBox").GetComponent<TMP_InputField>();
         errorBox = selectionMenuUI.transform.Find("ErrorText").GetComponent<TMP_Text>();
+        objectTitle = selectionMenuUI.transform.Find("ObjectTitle").GetComponent<TMP_Text>();
 
         // Add listeners to input field click events
         xCoordinateField.onSelect.AddListener(delegate { OnEditStart(); });
@@ -57,14 +59,15 @@ public class SelectionMenu : MonoBehaviour {
 
         // Populate text fields with selectedObject's parameters
         Vector3 objectPosition = ObjectInteraction.selectedObject.transform.position;
+        PointCharge pointChargeComponent = ObjectInteraction.selectedObject.GetComponent<PointCharge>();
 
         xCoordinateField.text = objectPosition.x.ToString();
         yCoordinateField.text = objectPosition.y.ToString();
         zCoordinateField.text = objectPosition.z.ToString();
 
-        // Come back and add charge value once that class structure is set up
-        chargeField.text = 0.0.ToString();
-        // chargeField.text = something.ToString();
+        chargeField.text = pointChargeComponent.ChargeValue.ToString();
+
+        objectTitle.text = "Object " + pointChargeComponent.UOID;
     }
 
     public void SaveChanges(){
@@ -94,7 +97,10 @@ public class SelectionMenu : MonoBehaviour {
         temporaryPosition.x = float.Parse(xCoordinateField.text);
         temporaryPosition.y = float.Parse(yCoordinateField.text);
         temporaryPosition.z = float.Parse(zCoordinateField.text);
-        // set object's charge value
+        // Set object's charge value
+        ObjectInteraction.selectedObject.GetComponent<PointCharge>().ChargeValue = float.Parse(chargeField.text);
+
+        // ObjectInteraction.selectedObject.
         ObjectInteraction.selectedObject.transform.position = temporaryPosition;
         isEditing = false;
     }

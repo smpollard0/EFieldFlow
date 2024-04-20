@@ -10,20 +10,20 @@ public class PlaceObjects : MonoBehaviour{
     bool buttonIsPressed = false;
 
     void Awake(){
-        // reference the camera (this feels dumb considering this script is attached to the camera)
+        // Reference the camera (this feels dumb considering this script is attached to the camera)
         mainCamera = Camera.main;
     }
 
     void Update() {
         // press Q button to play a game object
         if (Input.GetKey(KeyCode.Q) && !buttonIsPressed && !PauseMEnu.GameIsPaused && !SelectionMenu.isEditing){
-            // create gameobject to place
+            // Create gameobject to place
             GameObject objectToPlace;
             
-            // cast a ray from the camera through the mouse cursor position
+            // Cast a ray from the camera through the mouse cursor position
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            // switch statement to check what kind of object to create based on what is selected in the toolbar
+            // Switch statement to check what kind of object to create based on what is selected in the toolbar
             switch (UiController.selectedItemIndex){
                 // point charges
                 case 0:
