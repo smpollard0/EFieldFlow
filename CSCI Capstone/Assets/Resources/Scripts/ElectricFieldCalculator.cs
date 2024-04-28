@@ -44,7 +44,7 @@ public class ElectricFieldCalculator : MonoBehaviour {
 
             foreach (ElectricFieldResult field in fields) {
                 outputBox.text += field.TestUOID.ToString() + ": ";
-                outputBox.text += field.ElectricField.ToString() + " N/C" + "\n";
+                outputBox.text += field.ElectricField.ToString() + " N/C" + "\n\n";
             }
             EFieldValuesMenuUI.SetActive(true);
         }
