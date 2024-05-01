@@ -3276,7 +3276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EFieldValuesMenuUI: {fileID: 31221703}
-  fieldVector: {fileID: 0}
+  fieldVector: {fileID: 3112052127536903672, guid: abdd443e87dfbeb49963244a79072139, type: 3}
 --- !u!1 &969693603
 GameObject:
   m_ObjectHideFlags: 0
@@ -5130,7 +5130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EFieldValuesMenuUI: {fileID: 31221703}
-  fieldVector: {fileID: 0}
+  fieldVector: {fileID: 3112052127536903672, guid: abdd443e87dfbeb49963244a79072139, type: 3}
 --- !u!1 &1303370645
 GameObject:
   m_ObjectHideFlags: 0
